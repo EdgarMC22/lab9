@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color and Border Width Control</title>
+    <style>
+        .custom-text {
+            padding: 20px;
+            border: 1px solid black;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="custom-text" id="textToChange">Dummy Text.</p>
+        <label for="colorPicker">Choose a color (RGB): </label>
+        <input type="text" id="colorPicker" placeholder="e.g., 255, 0, 0"><br><br>
+        <label for="borderWidth">Choose border width: </label>
+        <input type="range" id="borderWidth" min="0" max="20" step="1" value="1"><br><br>
+        <button onclick="applyStyles()">Apply</button>
+    </div>
+
+    <script>
+        function applyStyles() {
+            var colorValue = document.getElementById('colorPicker').value;
+            var widthValue = document.getElementById('borderWidth').value;
+            var paragraph = document.getElementById('textToChange');
+
+            var colorArray = colorValue.split(',');
+            if (colorArray.length === 3) {
+                var r = parseInt(colorArray[0]);
+                var g = parseInt(colorArray[1]);
+                var b = parseInt(colorArray[2]);
+
+                paragraph.style.color = 'rgb(' + r + ',' + g + ',' + b + ')';
+                paragraph.style.borderColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+                paragraph.style.borderWidth = widthValue + 'px';
+            } else {
+                alert('Please enter valid RGB values in the format: "R, G, B"');
+            }
+        }
+    </script>
+</body>
+</html>
